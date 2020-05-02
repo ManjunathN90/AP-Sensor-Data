@@ -29,9 +29,24 @@ class GetResultsAPI(APIView):
     def get(self, request, *args, **kwargs):
         data = {}
         sensorDataObjs = SensorDataset.objects.all().values()
+        print(sensorDataObjs)
         for record in sensorDataObjs:
             record['timestamp'] = pd.to_datetime(record['timestamp'], unit = 's')+ pd.Timedelta('05:30:00')
         
         data['sensorData'] = sensorDataObjs
         data['message'] = str(len(sensorDataObjs)) + " records found"
         return Response(data, status.HTTP_200_OK)
+
+class FetchResultsAPI(APIView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        startDate = int(request.GET['startDate'])
+        endDate = int(request.GET['endDate'])
+        sensorType = request.GET['sensorType']
+        fetchResult = SensorDataset.objects.filter(timestamp__gte = startDate, timestamp__lte = endDate).values()
+        for record in fetchResult:
+            record['timestamp'] = pd.to_datetime(record['timestamp'], unit = 's')+ pd.Timedelta('05:30:00')
+        data['fetchResults'] = fetchResult
+        data['message'] = str(len(fetchResult)) + " records found" 
+        return Response(data, status.HTTP_200_OK)    

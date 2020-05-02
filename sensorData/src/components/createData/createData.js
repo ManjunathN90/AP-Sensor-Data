@@ -17,7 +17,6 @@ export default function CreateData(props) {
 
     const onSubmit = (data) => {
         data['timeStamp'] = String(Date.parse(data['timeStamp'])).slice(0,10)
-        // data['timeStamp'] = "1511161234"
         console.log(data)
         submitData(data);
     }
