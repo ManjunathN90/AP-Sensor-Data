@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './components/landingPage/landingPage';
 import CreateData from './components/createData/createData';
 import GetResults from './components/getResults/getResults';
-import logo from './logo.svg';
 import './App.css';
 
 

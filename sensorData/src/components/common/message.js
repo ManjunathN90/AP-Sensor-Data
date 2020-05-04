@@ -102,6 +102,7 @@ export default function Snackbars(props){
             return;
         }
         setOpenButton(false);
+        // props.type = false;
         window.location.reload(true);
     };
 
